@@ -1,4 +1,27 @@
 
 List of programs:
 
+0x - simple programs
+===================
 00 - helloworld
+
+1x - data structures
+====================
+
+2x - command line
+=================
+20 - echo
+21 - echo with flags
+
+3x - working with files
+=======================
+30 - cat
+31 - grep
+32 - copy
+33 - head
+34 - wc
+35 - word wrap
+
+4x - working with web and APIs
+==============================
+40 - wget
