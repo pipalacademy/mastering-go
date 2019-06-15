@@ -1,0 +1,26 @@
+Mastering Go
+June 19-21, 2019
+
+A S L Devi & Anand Chitipothu
+Pipal Academy
+https://pipal.in/
+@pipalacademy
+
+* A Taste of Go
+
+* Hello world!
+
+.play ../00_helloworld.go
+
+* References
+
+* An Introduction to Programming in Go
+
+.image images/book-intro-go.png _ 300
+.link https://www.golang-book.com/books/intro
+
+* Effective Go
+
+Tips for writing clear, idiomatic Go code.
+
+.link https://golang.org/doc/effective_go.html
