@@ -1,0 +1,13 @@
+
+* References
+
+* An Introduction to Programming in Go
+
+.image images/book-intro-go.png _ 300
+.link https://www.golang-book.com/books/intro
+
+* Effective Go
+
+Tips for writing clear, idiomatic Go code.
+
+.link https://golang.org/doc/effective_go.html
