@@ -79,6 +79,18 @@ Functions break a big job into smaller pieces that might be written by different
 - Every function call must provide an argument for each parameter, in the same order of declaration.
 - Go has no concept of default parameter values, nor any way to specify arguments by name.
 
+* Functions with multiple return values
+
+    func f() (int, string){
+        return 1, "one"
+    }
+
+In Go, it's very common for functions/methods to return a value and error.
+    func Open(name string) (*File, error)               // os.Open
+
+    func Get(url string) (resp *Response, err error)    //http.Get
+
+    func Marshal(v interface{}) ([]byte, error)         // json.Marshal
 
 * Problems
 
@@ -266,7 +278,6 @@ Go's basic types are
 
 - Find `uint n` for which `float64(1 << n) == float64(1<<n + 1)`
 
-Boolean
 - Write a function `itob` to convert given int to a boolean.
     itob(0)     // false
     itob(-1)    // true
@@ -277,6 +288,10 @@ Boolean
 A string is an immutable sequence of bytes.
 
     s := "hello, world"
+    r := `a multi
+        line
+        string`
+
     fmt.Println(len(s))
     fmt.Println(s[0], s[7]) // "104 119"  ('h' and 'w')
     fmt.Printf("%v %v", s[0], s[7]) // h w
@@ -363,8 +378,6 @@ The result will be 0 if a == b, -1 if a < b, and 1 if a > b
 
 * Session 3: Functions
 
-* Multiple return values
-
 * Functions are first class in Go
 
 Functions can be assigned to variables, passed as arguments to other functions and returned from other functions.
@@ -403,6 +416,42 @@ would print 3, 101 respectively.
 
 * Handling errors
 
+Proper error handling is a must for any robust program and it should facilitate to find out the cause of the bug quickly.
+
+    f, err := os.Open(filename)
+    defer f.Close()
+    if err != nil {
+        return "", err
+    }
+
+-
+
+    doc, err := html.Parse(resp.Body)
+    defer resp.Body.Close()
+    if err != nil {
+        return nil, fmt.Errorf("parsing %s as HTML: %v", url, err)
+    }
+
+- Library functions should usually propagate errors to the caller.
+- After checking an error, failure is usually dealt with before success.
+- Use `fmt.Errorf` to add more information to the error
+- Use `errors.New` to define new errors.
+
+    var NotFound := errors.New("NotFound")
+    ...
+
+    func caller(...) error {
+        return nil, NotFound
+    }
+
+    func callee(...){
+        val, err = caller(...)
+        if err == NotFound {
+            status = 404
+            return val, status
+    }
+
+
 * Deferred function calls
 
 Go's defer statement schedules a function call (the deferred function) to be run immediately before the function executing the defer returns.
@@ -411,6 +460,7 @@ Go's defer statement schedules a function call (the deferred function) to be run
 - It's very effective way to release resources regardless of which path a function takes to return.
 - Canonical examples include closing files, db connections and unlocking a mutex.
 - When a function returns, its deferred calls are executed in last-in-first-out order.
+- Deferred functions may read and assign to the returning function's named return values.
 
     func readContents(filename string) (string, error) {
         f, err := os.Open(filename)
@@ -423,7 +473,34 @@ Go's defer statement schedules a function call (the deferred function) to be run
     }
 
 * What would be output of
-.play -numbers ../programs/defer.go
+    func a() {
+        i := 0
+        defer fmt.Println(i)
+        i++
+        return
+    }
+-
+    func b() {
+        for i := 0; i < 4; i++ {
+            defer fmt.Print(i)
+        }
+    }
+-
+    func c() (i int) {
+        defer func() { i++ }()
+        return 1
+    }
+
+* Panic and recover
+
+- `panic` is used to terminate the program when the program cannot continue it's execution.
+- When a function `f` encounters `panic`, its execution is stopped, any deferred functions are executed and then the control returns to its caller. To the caller, F then behaves like a call to panic and process continues.
+- `recover` is a built-in function that regains control of a panicking goroutine. Recover is only useful inside deferred functions.
+
+.play -numbers ../programs/panic_recover.go
+
+* What would be output of
+.play -numbers ../programs/panic_recover_more.go
 
 * Variadic functions
 
@@ -436,8 +513,13 @@ A variadic function is one that can be called with varying numbers of arguments.
 - Write a function `avg` which takes variable number of float32s and returns their average.
 - Write a function `strjoin` that takes a separator as first argument followed by variable number of strings to join with that separator.
 
+* Methods
 
-* Panic and recover
+A method is simply a function with a special `receiver` argument.
+
+.play -numbers ../programs/methods_basic.go
+
+.play -numbers ../programs/methods_strings.go
 
 
 Session 4: Packages
