@@ -15,9 +15,9 @@ https://pipal.in/
 
 * Hello world!
 
-.play ../programs/helloworld.go
+.play -numbers ../programs/helloworld.go
 
-* Running
+* Running Go programs
 
     $ go build helloworld.go
     $ ./helloworld
@@ -28,19 +28,20 @@ or
 
 * Variables
 
-.play ../programs/variables.go
+.play -numbers ../programs/variables.go
 
+* More variables
 - Each variable declared and each package imported should be used for the program to compile.
 - Go prefers mixed caps for multi word names like `someVar` than with underscores like `some_var`
 - Every declared variable is initialized to its zero value.
 
-* Zero values
+*Problem*
 
-.play ../programs/zero_values.go
+- Find zero values of `string`, `bool`, `int` and `float32` types.
 
 * Constants
 
-.play ../programs/constants.go
+.play -numbers ../programs/constants.go
 
 - Constants can only be numbers, characters, strings or booleans.
 - They are created at compile time, even when defined as locals in functions.
@@ -55,11 +56,11 @@ or
 * Assignments
     Right hand side is evaluated and the vaules are assigned to the left hand side.
 
-.play ../programs/assignments.go
+.play -numbers ../programs/assignments.go
 
 * Functions
 
-Functions make it possible to break a big job into smaller pieces that might well be written by different people separated by both time and space. They make code more readable, hence reusable.
+Functions break a big job into smaller pieces that might be written by different people separated by both time and space. They make code more readable and reusable.
 
     func name(parameter-list) (result-list) {
         body
@@ -69,6 +70,10 @@ Functions make it possible to break a big job into smaller pieces that might wel
 
     func incr(m int) (int) {
         return m+1
+    }
+
+    func main(){
+        fmt.Println(incr(2))
     }
 
 - Every function call must provide an argument for each parameter, in the same order of declaration.
@@ -88,6 +93,7 @@ Functions make it possible to break a big job into smaller pieces that might wel
         return
     }
 
+: There's a lot more to do with functions in Go, we'll come back to them soon.
 
 * Control Structures
 
@@ -98,7 +104,9 @@ Functions make it possible to break a big job into smaller pieces that might wel
     }
 -
 
-    if cond {
+    if cond1 {
+        ...
+    } else if cond2 {
         ...
     } else {
         ...
@@ -121,6 +129,8 @@ Functions make it possible to break a big job into smaller pieces that might wel
 
 
 * Short if
+- Lets us do variable initialization followed by condition on it.
+- The variable would be accessible only in the `if...else` block.
 
     if v := someFunctionCall(); conditionOn(v) {
         ...
@@ -128,7 +138,7 @@ Functions make it possible to break a big job into smaller pieces that might wel
 
 -
 
-    func limitedPow(x, n, limit float64) float64 {
+    func cappedPow(x, n, limit float64) float64 {
         if v := math.Pow(x, n); v < limit {
             return v
         }
@@ -142,11 +152,11 @@ Functions make it possible to break a big job into smaller pieces that might wel
         ...
     }
 
-    for condition {
+    for condition { // while
         ...
     }
 
-    for {
+    for {   // forever
         ...
     }
 
@@ -156,7 +166,7 @@ Functions make it possible to break a big job into smaller pieces that might wel
         sum += i
     }
 
-`break`, `continue` work as in other programming languages.
+`break`, `continue` work same as in other programming languages.
 
 We'll see iterating over arrays, slices and maps with `for` when we introduce those types.
 
@@ -169,20 +179,44 @@ We'll see iterating over arrays, slices and maps with `for` when we introduce th
 
 * switch
 
+    Used for multi-way branch. Though one can achieve the same with `if...else if`, it's more idiomatic in Go.
+
+    switch (optional-init; ) v {
+    case cond1:
+        ...
+    case cond2:
+        ...
+    default:
+        ...
+    }
+
+Only the matched case is run, not all the ones that follow.
+
+
+* Example
+
+.play -numbers ../programs/switch.go
+
+
 * Using standard library
 
-.code ../programs/sum.go
-
-Documentation of <pkg> can be seen by `$ go doc <pkg>` and is available at https://golang.org/pkg/<pkg>
+Documentation of go package <pkg> is available at `$ go doc <pkg>`. Details of a variable/function can be seen by `$go doc <pkg>.<funcName>`
 
 
-* Problems
-- Write a program `echo` which prints out the command line arguments.
+- Write a program `echo` which prints out the command line arguments. Hint: Use `os` package.
 
     $ go run echo.go this is a line
     this is a line
 
-- Extend `echo` program to take an optional separator
+- Write a program to print out sum of the integers passed as command line arguments. Hint: Use `strconv` package.
+    $ go run sum.go  1 2 3 4
+    10
+    $ go run sum.go
+    0
+
+: .code ../programs/sum.go
+
+- Extend `echo` program to take an optional separator. Hint: Use `flag` package.
 
     $ go run echo.go -s , this is a line
     this,is,a,line
@@ -190,19 +224,69 @@ Documentation of <pkg> can be seen by `$ go doc <pkg>` and is available at https
     $ go run echo.go -s / a bc def
     a/bc/def
 
-* Naive Solution
-.play ../programs/echo_naive.go
+:* Naive Solution
+:.play -numbers ../programs/echo_naive.go
 
-* Solution using std lib
-.play ../programs/echo.go
+:* Solution using std lib
+:.play -numbers ../programs/echo.go
 
-Session 2: Basic & Composite Types
+* Session 2: Basic & Composite Types
 
-* Integers, floating-point numbers & booleans
+* Basic Types
 
-: bit operators, power, % etc
+Go's basic types are
+    bool
+
+    string
+
+    int  int8  int16  int32  int64
+    uint uint8 uint16 uint32 uint64 uintptr
+
+    byte // alias for uint8
+
+    rune // alias for int32
+         // represents a Unicode code point
+
+    float32 float64
+
+    complex64 complex128
+
+
+* Integers, Floats and booleans
+
+    var f float32 = 1 << 24
+    fmt.Println(f == f+1)   // true
+
+    var i uint = 1 << 24
+    fmt.Println(i == i+1)   // false
+
+    var f float64 = 1 << 24
+    fmt.Println(f == f+1)   // false
+
+
+- Find `uint n` for which `float64(1 << n) == float64(1<<n + 1)`
+
+Boolean
+- Write a function `itob` to convert given int to a boolean.
+    itob(0)     // false
+    itob(-1)    // true
+
 
 * Strings, bytes and runes
+
+A string is an immutable sequence of bytes.
+
+    s := "hello, world"
+    fmt.Println(len(s))
+    fmt.Println(s[0], s[7]) // "104 119"  ('h' and 'w')
+    fmt.Printf("%v %v", s[0], s[7]) // h w
+
+`s[i:j]` gives us substring of `s` with chars from index `i`, upto `j` (not including `j`th).
+
+    fmt.Println(s[0:5]) //  "hello"
+    fmt.Println(s[:5])  //  "hello"
+    fmt.Println(s[7:])  //  "world"
+    fmt.Println(s[:])   //  "hello, world"
 
 * Problems
 
@@ -211,11 +295,60 @@ Session 2: Basic & Composite Types
     func strjoin(sep string, strs []string)
 
 
-* Arrays and slices
+* Arrays
+
+The type [n]T is an array of n values of type T.
+
+    var a [10]int
+    abcd := [4]string{"ant", "bee", "cat", "dog"} // "{}", not []
+
+- Arrays can't be resized.
+- Each element of the array is initialized to zero value of type T, by default.
+
+*Iterating over array*
+
+    for index, value := range a {
+        fmt.Println(index, value)
+    }
+
+    for index := range a {
+        fmt.Println(iindex)
+    }
+
+* Arrays contd ..
+
+.play -numbers ../programs/arrays.go
+
+- Check if we can call `changeFirst` with a variable of type `[5]int` as first arg.
+
+* Slices
+
+.play -numbers ../programs/slices_intro.go
+
+* Slices contd..
+
+    `s[i:j]` gives us subslice of `s` with elements from index `i`, upto `j` (not including `j`th).
+.play -numbers ../programs/slices_indices.go
+
+* Slices contd..
+
+- A slice does not store any data, it just describes a section of an underlying array.
+- Changing the elements of a slice modifies the corresponding elements of its underlying array.
+- Other slices that share the same underlying array will see those changes.
+
+* Slices contd..
+
+.play -numbers ../programs/slices_pass_to_func.go
+
+* Slices contd..
+
+.play -numbers ../programs/slices_nil_empty.go
 
 
 * Problems
 
+- Write a function `avg` which takes a slice of float32s and returns their average.
+See if you can call it with a float32 array as parameter.
 - Write a function `compare` that returns an integer comparing the two byte slices, lexicographically.
 The result will be 0 if a == b, -1 if a < b, and 1 if a > b
 
@@ -227,21 +360,37 @@ The result will be 0 if a == b, -1 if a < b, and 1 if a > b
 
 * Session 3: Functions
 
-* Function declarations
-
 * Multiple return values
 
 * Functions are first class in Go
 
-Functions can be assigned to variables, passed as arguments to other functions and returned from other functions
+Functions can be assigned to variables, passed as arguments to other functions and returned from other functions.
 
-.code ../programs/func_as_param.go
+    func square(n int) int {
+        return n*n
+    }
+    f = square
 
-.code ../programs/func_as_var.go
+    fmt.Println(f(4) == square(4)) //true
 
-* Problems
 
-- Write a function `filter` to take a function `f` and slice `a` as parameters that returns slice with elements `e` for which f(e) is true
+- Write a function `adder` so that
+    add2 := adder(2)
+    add100 := adder(100)
+    fmt.Println(add2(1), add100(1))
+would print 3, 101 respectively.
+
+- Write a function logger
+:* Solution
+:.code ../programs/func_as_var.go
+
+- Write a function `mapper` that takes a function `f` and slice of `int`s as parameters and returns slice with `f(e)`s in it, for each e in argument slice.
+    fmt.Println(mapper(square, []int{1, 2, 3, 4})
+    [1, 4, 9, 16]
+
+: .code ../programs/func_as_param.go
+
+- Write a function `filter` that takes a function `f` and slice of ints as parameters that returns slice with elements `e` for which f(e) is true
 
 
 * Handling errors
@@ -252,7 +401,7 @@ A `defer` statement defers the execution of a function until the surrounding fun
 
 The deferred call's arguments are evaluated immediately, but the function call is not executed until the surrounding function returns.
 
-.play ../programs/defer.go
+.play -numbers ../programs/defer.go
 
 * Variadic functions
 
@@ -260,9 +409,9 @@ A variadic function is one that can be called with varying numbers of arguments.
 
 `fmt.Println` is a good example of a one.
 
-.play ../programs/variadic_sum.go
+.play -numbers ../programs/variadic_sum.go
 
-- Write a function `sum` that takes variable number of float32 numbers and returns their sum.
+- Write a function `avg` which takes variable number of float32s and returns their average.
 - Write a function `strjoin` that takes a separator as first argument followed by variable number of strings to join with that separator.
 
 

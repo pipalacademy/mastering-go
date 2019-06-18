@@ -12,4 +12,6 @@ func main() {
 	Add2 := adder(2)
 	Add100 := adder(100)
 	fmt.Println(Add2(1), Add100(1))
+
+	fmt.Println(nil)
 }
