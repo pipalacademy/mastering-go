@@ -1,14 +1,11 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"strings"
+	"os"
 )
 
 func main() {
-	var sep = flag.String("s", " ", "separator")
-
-	flag.Parse()
-	fmt.Println(strings.Join(flag.Args(), *sep))
+	arg := os.Args[1]
+	fmt.Println(arg)
 }

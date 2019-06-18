@@ -15,9 +15,5 @@ func main() {
 	// m = 5.6 		// compilation error
 	fmt.Println(i, m, n, pi, e, a, b)
 
-	var ( //grouping related variables
-		name string = "alice"
-		age  int    = 21
-	)
-	_, _ = name, age // ignore the values
+	var name string = "alice"
 }

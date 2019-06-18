@@ -6,7 +6,7 @@ import (
 
 func c() (i int) {
 	defer func() { i++ }()
-	return 100
+	return 1
 }
 
 func main() {
@@ -26,4 +26,9 @@ func main() {
 	// fmt.Println(strings.ToUpper("one"))
 	// fmt.Println(strings.Repeat("a", 5))
 	fmt.Println(c(), r)
+
+	var b rune
+	fmt.Println(b)
+	c := 'œ'
+	fmt.Printf("%T %v %q\n", c, c, c)
 }

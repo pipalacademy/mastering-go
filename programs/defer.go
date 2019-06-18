@@ -4,19 +4,19 @@ import (
 	"fmt"
 )
 
-func foo(s string) string {
-	fmt.Println("1")
-	return s
+// * What would be output of
+func a() {
+	i := 0
+	defer fmt.Println(i)
+	i++
+	return
 }
-
-func hugeTask(s string) string {
-	fmt.Println("2")
-	return s
+func b() {
+	for i := 0; i < 4; i++ {
+		defer fmt.Print(i)
+	}
 }
-
-func main() {
-	s := "go"
-	defer foo(s)
-	defer hugeTask(foo(s))
-	fmt.Println("3")
+func c() (i int) {
+	defer func() { i++ }()
+	return 1
 }

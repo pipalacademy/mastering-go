@@ -1,17 +1,9 @@
-Mastering Go
-June 19-21, 2019
-
-A S L Devi & Anand Chitipothu
-Pipal Academy
-https://pipal.in/
-@pipalacademy
-
-
 * Getting started
 
-* Brief History of Go
+* Verify Go installation
 
-* A Taste of Go
+    $ go version
+    go version go1.12.6 darwin/amd64
 
 * Hello world!
 
@@ -28,16 +20,37 @@ or
 
 * Variables
 
-.play -numbers ../programs/variables.go
+The `var` statement declares a list of variables and the type is at the end.
 
-* More variables
-- Each variable declared and each package imported should be used for the program to compile.
+    var m int
+    var a, b bool
+
+    m = 1
+    a, b = true, false
+
+* Variables with initializers
+
+A var declaration can include initializers, one per variable.
+
+    var m int = 1
+    var a, b bool = true, false
+
+* Short variable declarations
+
+    m := 1                  // same as: var m int = 1
+    a, b := true, false     // same as: var a, b bool = true, false
+
+* Variables contd...
+
+- There should not be unused variables or imported packages for the program to compile.
 - Go prefers mixed caps for multi word names like `someVar` than with underscores like `some_var`
 - Every declared variable is initialized to its zero value.
 
-*Problem*
+* Variables contd...
 
-- Find zero values of `string`, `bool`, `int` and `float32` types.
+.play ../programs/zero_values.go
+
+- Find zero values of other types such as `string`, `bool` and `float32`.
 
 * Constants
 
@@ -58,26 +71,142 @@ or
 
 .play -numbers ../programs/assignments.go
 
+* Common data types
+
+    - Integers
+    - Floating point numbers
+    - Boolean values
+    - Arrays
+    - Slices
+    - Strings, Bytes and Runes
+    - Maps
+    - Structs
+    - Pointers
+
+* Integers
+
+    var n int       // initializes to 0
+
+    var n int = 2
+
+    n := 2
+
+There are variants for different sizes and their unsigned forms.
+
+* Floating point numbers
+
+    var f float32   // initializes to 0.0
+
+    var f float32 = 1.2
+
+    f := 3.14
+
+There is `float64` for dealing with higher precision floating point numbers.
+
+* Boolean values
+
+    var b bool      // initializes to false
+
+    var b bool = true
+
+    b := true
+
+* Arrays
+
+    var a [5]int     // initializes to {0, 0, 0, 0, 0}
+
+    a := [5]int{1, 2, 3, 4, 5}
+
+Arrays have fixed sizes and can be of any type.
+
+    b := [3]string{"one", "two", "three"}
+
+    c := [4]bool{true, false, false, true}
+
+* Slices
+
+    var a []int     // initializes to nil
+
+    b := []int{1, 2, 3, 4, 5}
+
+    c := []string{"one", "two", "three"}
+
+* Strings
+
+    var a string    // initializes to ""
+
+    b := "hello, go!"
+
+    c := "œ∑†¥ß"    // non-ascii
+
+* Bytes
+
+    var b byte      // initializes to 0
+
+    b := 'p'
+
+    c := 112
+
+* Runes
+
+    var b rune      // initializes to 0
+
+    b := 'p'
+
+    c := 'œ'
+
+
+* Maps
+
+    var m map[string]int    // initializes to nil
+
+    m1 := make(map[string]int)
+    m1["one"] = 1
+    m1["two"] = 2
+
+    m2 := map[string]int{"one": 1, "two": 2}
+
+* Structs
+
+    type Point struct {
+        x int
+        y int
+    }
+
+    p := Point{1, 2}
+
+* Pointers
+    var p *int      // initializes to nil
+
+    a := 10
+    p := &a
+
+    b := *p         // b = 10
+
+
 * Functions
 
 Functions break a big job into smaller pieces that might be written by different people separated by both time and space. They make code more readable and reusable.
 
-    func name(parameter-list) (result-list) {
+    func name(parameters) returnType {
         body
     }
 
 -
 
-    func incr(m int) (int) {
+    func incr(m int) int {
         return m+1
     }
-
-    func main(){
-        fmt.Println(incr(2))
-    }
+    incr(2) // 3
 
 - Every function call must provide an argument for each parameter, in the same order of declaration.
 - Go has no concept of default parameter values, nor any way to specify arguments by name.
+
+* Problems
+
+- Write a function `add` that takes 2 integers as arguments and returns their sum.
+- Write a function `square` that takes an integer as argument and return its square.
+- Write a function `sumOfSquares` to compute sum of squares of two integers.
 
 * Functions with multiple return values
 
@@ -85,18 +214,22 @@ Functions break a big job into smaller pieces that might be written by different
         return 1, "one"
     }
 
-In Go, it's very common for functions/methods to return a value and error.
+Converting string to integer can be done by
+
+    n, err := strconv.Atoi("123")
+
+
+In Go, it's very common for functions/methods to return a value followed by an error.
+
     func Open(name string) (*File, error)               // os.Open
 
-    func Get(url string) (resp *Response, err error)    //http.Get
+    func Get(url string) (resp *Response, err error)    // http.Get
 
     func Marshal(v interface{}) ([]byte, error)         // json.Marshal
 
 * Problems
 
-- Write a function `add` that takes 2 integers as parameters and returns their sum.
-- Write a function `swap` that takes 2 strings as parameters and returns them in swapped order.
-- Write a function `hypot` to return hypotenuse of a triangle, given its two sides. (hint: Use `math.Sqrt`)
+- Write a function `divide` that takes 2 integers as arguments and return quotient and remainder.
 
 * Named return values
 
@@ -114,7 +247,8 @@ In Go, it's very common for functions/methods to return a value and error.
     if cond {
         ...
     }
--
+
+* if ... else
 
     if cond1 {
         ...
@@ -124,7 +258,7 @@ In Go, it's very common for functions/methods to return a value and error.
         ...
     }
 
--
+* if - Example
 
     func abs(n int) int {
         if n >= 0 {
@@ -140,7 +274,7 @@ In Go, it's very common for functions/methods to return a value and error.
 - Write a function `min3` to return minimum of 3 integers.
 
 
-* Short if
+* if with a short statement
 - Lets us do variable initialization followed by condition on it.
 - The variable would be accessible only in the `if...else` block.
 
@@ -148,7 +282,8 @@ In Go, it's very common for functions/methods to return a value and error.
         ...
     }
 
--
+
+* Example
 
     func cappedPow(x, n, limit float64) float64 {
         if v := math.Pow(x, n); v < limit {
@@ -164,14 +299,19 @@ In Go, it's very common for functions/methods to return a value and error.
         ...
     }
 
+* for without init and post
+
     for condition { // while
         ...
     }
+
+* for without condition
 
     for {   // forever
         ...
     }
 
+* for - Example
 
     sum := 0
     for i := 0; i < 10; i++ {
@@ -185,9 +325,15 @@ We'll see iterating over arrays, slices and maps with `for` when we introduce th
 
 * Problems
 
+- Write a function `longest` to find the longest word in a slice of strings.
+    func longest(words []string) string{
+        ...
+    }
+- Write a function `count` to find the number of occurences of a character in a string.
+    func count(s string, c byte){
+    ...
+    }
 - Write a function `isPrime` to check if a given integer is a prime.
-- Write a function `gcd` to return greatest common divisor of given 2 integers.
-
 
 * switch
 
@@ -212,35 +358,33 @@ Only the matched case is run, not all the ones that follow.
 
 * Using standard library
 
-Documentation of go package <pkg> is available at `$ go doc <pkg>`. Details of a variable/function can be seen by `$go doc <pkg>.<funcName>`
+Documentation of each go package <pkg>  `$ go doc <pkg>`.
+Details of a variable/function can be seen by `$go doc <pkg>.<funcName>`
 
+- Write a program to print out its first command line argument.
+Hint: Use `os.Args`
 
-- Write a program `echo` which prints out the command line arguments. Hint: Use `os` package.
+:.play ..programs/echo1.go
+
+- Write a program `square.go` which takes an integer as command line argument and prints its square.
+Hint: Use `strconv.Atoi`.
+
+- Write a program `count_args.go` which prints out the count of its command line arguments.
+Hint: Use `os.Args`
+
+- Write a function `countWords` to count words in a given sentence.
+Hint: Use `strings.Split`
+
+    func countWords(sen string)int{
+
+    }
+
+- Write a program `echo` which prints out all the command line arguments.
 
     $ go run echo.go this is a line
     this is a line
 
-- Write a program to print out sum of the integers passed as command line arguments. Hint: Use `strconv` package.
-    $ go run sum.go  1 2 3 4
-    10
-    $ go run sum.go
-    0
-
 : .code ../programs/sum.go
-
-- Extend `echo` program to take an optional separator. Hint: Use `flag` package.
-
-    $ go run echo.go -s , this is a line
-    this,is,a,line
-
-    $ go run echo.go -s / a bc def
-    a/bc/def
-
-:* Naive Solution
-:.play -numbers ../programs/echo_naive.go
-
-:* Solution using std lib
-:.play -numbers ../programs/echo.go
 
 * Session 2: Basic & Composite Types
 
@@ -265,36 +409,22 @@ Go's basic types are
 
 
 * Integers, Floats and booleans
-
-    var f float32 = 1 << 24
-    fmt.Println(f == f+1)   // true
-
-    var i uint = 1 << 24
-    fmt.Println(i == i+1)   // false
-
-    var f float64 = 1 << 24
-    fmt.Println(f == f+1)   // false
-
-
-- Find `uint n` for which `float64(1 << n) == float64(1<<n + 1)`
-
-- Write a function `itob` to convert given int to a boolean.
-    itob(0)     // false
-    itob(-1)    // true
-
-
 * Strings, bytes and runes
 
-A string is an immutable sequence of bytes.
+A string is an immutable array of bytes.
+Strings are enclosed in double quotes.
 
     s := "hello, world"
+
+Multi line strings are enclosed in backquotes.
+
     r := `a multi
         line
-        string`
+        strings`
 
     fmt.Println(len(s))
     fmt.Println(s[0], s[7]) // "104 119"  ('h' and 'w')
-    fmt.Printf("%v %v", s[0], s[7]) // h w
+    fmt.Printf("%c %c", s[0], s[7]) // h w
 
 `s[i:j]` gives us substring of `s` with chars from index `i`, upto `j` (not including `j`th).
 
@@ -305,12 +435,15 @@ A string is an immutable sequence of bytes.
 
 * Problems
 
-- Write a function `reverse` to return its argument string reversed rune-wise.
-    func reverse(a string)string
+- Write a function `reverse` to return its argument string in reverse order.
+    func reverse(s string) string{
+    ...
+    }
+
 - Write a function that joins a slice of strings with a separator.
-    func strjoin(strs []string, sep string)
-- Write a function `index` returns the first index of the target string t in , or -1 if no match is found.
-    func index(strs []string, t string) int
+    func strjoin(strs []string, sep string){
+    ...
+    }
 
 
 * Arrays
@@ -318,30 +451,32 @@ A string is an immutable sequence of bytes.
 The type [n]T is an array of n values of type T.
 
     var a [10]int
+
     abcd := [4]string{"ant", "bee", "cat", "dog"} // "{}", not []
 
-- Arrays can't be resized.
+- Arrays cannot be resized.
 - Each element of the array is initialized to zero value of type T, by default.
 
-*Iterating over array*
+* What would be output of
+.play -numbers ../programs/arrays.go
+
+* Slices
+
+.play -numbers ../programs/slices_intro.go
+
+* Iterating over slice/array
 
     for index, value := range a {
         fmt.Println(index, value)
     }
 
     for index := range a {
-        fmt.Println(iindex)
+        fmt.Println(index)
     }
 
-* Arrays contd ..
-
-.play -numbers ../programs/arrays.go
-
-- Check if we can call `changeFirst` with a variable of type `[5]int` as first arg.
-
-* Slices
-
-.play -numbers ../programs/slices_intro.go
+    for _, value := range a {
+        fmt.Println(value)
+    }
 
 * Slices contd..
 
@@ -354,21 +489,27 @@ The type [n]T is an array of n values of type T.
 - Changing the elements of a slice modifies the corresponding elements of its underlying array.
 - Other slices that share the same underlying array will see those changes.
 
-* Slices contd..
 
-.play -numbers ../programs/slices_pass_to_func.go
+* Problems
+
+- Write a function `integers` that takes a slice of strings and converts them slice of numbers. Also, return an error if any of the given values is not a valid integer.
+
+    func integers(values []string) ([]int, error){
+
+    }
+
+- Write a function `sum` which takes a slice of ints and returns their sum.
+
+- Combine the above two functions to write a program that takes numbers as command line arguments and prints their sum. In case of error, it should print out the error.
 
 * Slices contd..
 
 .play -numbers ../programs/slices_nil_empty.go
 
+* Slices contd..
 
-* Problems
+.play -numbers ../programs/slices_pass_to_func.go
 
-- Write a function `avg` which takes a slice of float32s and returns their average.
-See if you can call it with a float32 array as parameter.
-- Write a function `compare` that returns an integer comparing the two byte slices, lexicographically.
-The result will be 0 if a == b, -1 if a < b, and 1 if a > b
 
 * Maps
 * Struct
@@ -416,15 +557,10 @@ would print 3, 101 respectively.
 
 * Handling errors
 
-Proper error handling is a must for any robust program and it should facilitate to find out the cause of the bug quickly.
+Proper error handling is a must for any robust program.
+It should also facilitate to find out the cause of the bug quickly.
 
-    f, err := os.Open(filename)
-    defer f.Close()
-    if err != nil {
-        return "", err
-    }
-
--
+* Example
 
     doc, err := html.Parse(resp.Body)
     defer resp.Body.Close()
@@ -435,32 +571,17 @@ Proper error handling is a must for any robust program and it should facilitate 
 - Library functions should usually propagate errors to the caller.
 - After checking an error, failure is usually dealt with before success.
 - Use `fmt.Errorf` to add more information to the error
-- Use `errors.New` to define new errors.
-
-    var NotFound := errors.New("NotFound")
-    ...
-
-    func caller(...) error {
-        return nil, NotFound
-    }
-
-    func callee(...){
-        val, err = caller(...)
-        if err == NotFound {
-            status = 404
-            return val, status
-    }
-
 
 * Deferred function calls
 
-Go's defer statement schedules a function call (the deferred function) to be run immediately before the function executing the defer returns.
+A defer statement defers the execution of a function until the surrounding function returns.
 
 - The deferred call's arguments are evaluated immediately.
 - It's very effective way to release resources regardless of which path a function takes to return.
 - Canonical examples include closing files, db connections and unlocking a mutex.
 - When a function returns, its deferred calls are executed in last-in-first-out order.
-- Deferred functions may read and assign to the returning function's named return values.
+
+* Example
 
     func readContents(filename string) (string, error) {
         f, err := os.Open(filename)
@@ -472,23 +593,11 @@ Go's defer statement schedules a function call (the deferred function) to be run
         ...
     }
 
-* What would be output of
-    func a() {
-        i := 0
-        defer fmt.Println(i)
-        i++
-        return
-    }
--
-    func b() {
-        for i := 0; i < 4; i++ {
-            defer fmt.Print(i)
-        }
-    }
--
-    func c() (i int) {
-        defer func() { i++ }()
-        return 1
+* What would be output of the following
+
+    func main(){
+        defer fmt.Println("hello")
+        fmt.Println("world")
     }
 
 * Panic and recover
