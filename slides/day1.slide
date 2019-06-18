@@ -291,8 +291,11 @@ A string is an immutable sequence of bytes.
 * Problems
 
 - Write a function `reverse` to return its argument string reversed rune-wise.
+    func reverse(a string)string
 - Write a function that joins a slice of strings with a separator.
-    func strjoin(sep string, strs []string)
+    func strjoin(strs []string, sep string)
+- Write a function `index` returns the first index of the target string t in , or -1 if no match is found.
+    func index(strs []string, t string) int
 
 
 * Arrays
@@ -380,27 +383,46 @@ Functions can be assigned to variables, passed as arguments to other functions a
     fmt.Println(add2(1), add100(1))
 would print 3, 101 respectively.
 
-- Write a function logger
 :* Solution
 :.code ../programs/func_as_var.go
 
-- Write a function `mapper` that takes a function `f` and slice of `int`s as parameters and returns slice with `f(e)`s in it, for each e in argument slice.
-    fmt.Println(mapper(square, []int{1, 2, 3, 4})
-    [1, 4, 9, 16]
+
+- Write a function `mapper` returns a new slice containing the results of applying the function `f` to each string in the original slice.
+    fmt.Println(mapper(strings.ToUpper, []string{"one", "two", "three"})
+    ["ONE", "TWO", "THREE"]
 
 : .code ../programs/func_as_param.go
 
-- Write a function `filter` that takes a function `f` and slice of ints as parameters that returns slice with elements `e` for which f(e) is true
+- Write a function `filter` that returns a new slice containing all strings in the slice that satisfy the predicate `f`.
+    fmt.Println(mapper(strings.HasPrefix("o"), []string{"one", "two", "three"})
+    ["one"]
 
+- Write a function `all` that returns `true` if all of the strings in the slice satisfy the predicate `f`.
+    fmt.Println(all(strings.HasSuffix("o"), []string{"one", "two", "three"})
+    false
 
 * Handling errors
 
 * Deferred function calls
 
-A `defer` statement defers the execution of a function until the surrounding function returns.
+Go's defer statement schedules a function call (the deferred function) to be run immediately before the function executing the defer returns.
 
-The deferred call's arguments are evaluated immediately, but the function call is not executed until the surrounding function returns.
+- The deferred call's arguments are evaluated immediately.
+- It's very effective way to release resources regardless of which path a function takes to return.
+- Canonical examples include closing files, db connections and unlocking a mutex.
+- When a function returns, its deferred calls are executed in last-in-first-out order.
 
+    func readContents(filename string) (string, error) {
+        f, err := os.Open(filename)
+        if err != nil {
+            return "", err
+        }
+        defer f.Close()
+        // read content from f
+        ...
+    }
+
+* What would be output of
 .play -numbers ../programs/defer.go
 
 * Variadic functions

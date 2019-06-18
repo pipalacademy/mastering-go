@@ -1,8 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+func foo(s string) string {
+	fmt.Println("1")
+	return s
+}
+
+func hugeTask(s string) string {
+	fmt.Println("2")
+	return s
+}
 
 func main() {
-	defer fmt.Println("world")
-	fmt.Println("hello")
+	s := "go"
+	defer foo(s)
+	defer hugeTask(foo(s))
+	fmt.Println("3")
 }
