@@ -7,7 +7,7 @@ https:/pipal.in/
 
 * Functions are first class in Go
 
-Functions can be assigned to variables, passed as arguments to other functions and returned from other functions.
+* Functions can be assigned to variables
 
     func square(n int) int {
         return n*n
@@ -15,7 +15,6 @@ Functions can be assigned to variables, passed as arguments to other functions a
     f = square
 
     fmt.Println(f(4) == square(4)) // true
-
 
 * Anonymous functions
 
@@ -25,29 +24,31 @@ Functions can be assigned to variables, passed as arguments to other functions a
 
     fmt.Println(sq(2) == square(2)) // true
 
+* Functions can be passed as arguments to other functions
+
+.play -numbers functions-methods/funcs_as_args.go
+
+* Functions can be returned from other functions.
+
 - Write a function `adder` so that
     add2 := adder(2)
     add100 := adder(100)
     fmt.Println(add2(1), add100(1))
 would print 3, 101 respectively.
 
-:* Solution
-:.code functions-methods/func_as_var.go
+
+.code functions-methods/adder.go
 
 
 - Write a function `mapper` returns a new slice containing the results of applying the function `f` to each string in the original slice.
     fmt.Println(mapper(strings.ToUpper, []string{"one", "two", "three"})
     ["ONE", "TWO", "THREE"]
 
-: .code functions-methods/func_as_param.go
+.code functions-methods/func_as_param.go
 
 - Write a function `filter` that returns a new slice containing all strings in the slice that satisfy the predicate `f`.
     fmt.Println(mapper(strings.HasPrefix("o"), []string{"one", "two", "three"})
     ["one"]
-
-- Write a function `all` that returns `true` if all of the strings in the slice satisfy the predicate `f`.
-    fmt.Println(all(strings.HasSuffix("o"), []string{"one", "two", "three"})
-    false
 
 * Handling errors
 
