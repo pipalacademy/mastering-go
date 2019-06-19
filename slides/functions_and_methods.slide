@@ -19,14 +19,14 @@ Functions can be assigned to variables, passed as arguments to other functions a
 would print 3, 101 respectively.
 
 :* Solution
-:.code ../programs/func_as_var.go
+:.code functions-methods/func_as_var.go
 
 
 - Write a function `mapper` returns a new slice containing the results of applying the function `f` to each string in the original slice.
     fmt.Println(mapper(strings.ToUpper, []string{"one", "two", "three"})
     ["ONE", "TWO", "THREE"]
 
-: .code ../programs/func_as_param.go
+: .code functions-methods/func_as_param.go
 
 - Write a function `filter` that returns a new slice containing all strings in the slice that satisfy the predicate `f`.
     fmt.Println(mapper(strings.HasPrefix("o"), []string{"one", "two", "three"})
@@ -87,10 +87,10 @@ A defer statement defers the execution of a function until the surrounding funct
 - When a function `f` encounters `panic`, its execution is stopped, any deferred functions are executed and then the control returns to its caller. To the caller, F then behaves like a call to panic and process continues.
 - `recover` is a built-in function that regains control of a panicking goroutine. Recover is only useful inside deferred functions.
 
-.play -numbers ../programs/panic_recover.go
+.play -numbers functions-methods/panic_recover.go
 
 * What would be output of
-.play -numbers ../programs/panic_recover_more.go
+.play -numbers functions-methods/panic_recover_more.go
 
 * Variadic functions
 
@@ -98,7 +98,7 @@ A variadic function is one that can be called with varying numbers of arguments.
 
 `fmt.Println` is a good example of a one.
 
-.play -numbers ../programs/variadic_sum.go
+.play -numbers functions-methods/variadic_sum.go
 
 - Write a function `avg` which takes variable number of float32s and returns their average.
 - Write a function `strjoin` that takes a separator as first argument followed by variable number of strings to join with that separator.
@@ -107,7 +107,7 @@ A variadic function is one that can be called with varying numbers of arguments.
 
 A method is simply a function with a special `receiver` argument.
 
-.play -numbers ../programs/methods_basic.go
+.play -numbers functions-methods/methods_basic.go
 
-:.play -numbers ../programs/methods_strings.go
+:.play -numbers functions-methods/methods_strings.go
 
