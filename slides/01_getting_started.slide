@@ -78,15 +78,15 @@ A var declaration can include initializers, one per variable.
 
 * Common data types
 
-    - Integers
-    - Floating point numbers
-    - Boolean values
-    - Arrays
-    - Slices
-    - Strings, Bytes and Runes
-    - Maps
-    - Structs
-    - Pointers
+- Integers
+- Floating point numbers
+- Boolean values
+- Arrays
+- Slices
+- Strings, Bytes and Runes
+- Maps
+- Structs
+- Pointers
 
 * Integers
 
@@ -370,7 +370,7 @@ Details of a variable/function can be seen by `$go doc <pkg>.<funcName>`
 - Write a program to print out its first command line argument.
 Hint: Use `os.Args`
 
-:.play ..programs/echo1.go
+: .play ..programs/echo1.go
 
 - Write a program `square.go` which takes an integer as command line argument and prints its square.
 Hint: Use `strconv.Atoi`.
@@ -402,7 +402,7 @@ Go's basic types are
     string
 
     int  int8  int16  int32  int64
-    uint uint8 uint16 uint32 uint64 uintptr
+    uint uint8 uint16 uint32 uint64
 
     byte // alias for uint8
 
@@ -415,6 +415,21 @@ Go's basic types are
 
 
 * Integers, Floats and booleans
+
+- Integers
+    +, -, *, /,
+     %,
+    <<, >>, &, |, ^,
+    ==, !=, > , <, >=, <=
+
+- Floats
+    +, -, *, /,
+    ==, !=, > , <, >=, <=
+
+- Booleans
+    &&, ||, !
+
+
 * Strings, bytes and runes
 
 A string is an immutable array of bytes.
