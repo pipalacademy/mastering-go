@@ -1,4 +1,3 @@
-A Brief History of Go
 Mastering Go Workshop
 
 A S L Devi & Anand Chitipothu
@@ -58,7 +57,7 @@ Go has only 25 reserved keywords.
 
 * What is Go good for?
 
-Go is very well suited for system programming. 
+Go is very well suited for system programming.
 
 - long lived server-side applications
 - backend APIs, databases, infrastructure management
