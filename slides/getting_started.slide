@@ -7,7 +7,7 @@
 
 * Hello world!
 
-.play -numbers ../programs/helloworld.go
+.play -numbers getting-started/helloworld.go
 
 * Running Go programs
 
@@ -48,13 +48,13 @@ A var declaration can include initializers, one per variable.
 
 * Variables contd...
 
-.play ../programs/zero_values.go
+.play getting-started/zero_values.go
 
 - Find zero values of other types such as `string`, `bool` and `float32`.
 
 * Constants
 
-.play -numbers ../programs/constants.go
+.play -numbers getting-started/constants.go
 
 - Constants can only be numbers, characters, strings or booleans.
 - They are created at compile time, even when defined as locals in functions.
@@ -69,7 +69,7 @@ A var declaration can include initializers, one per variable.
 * Assignments
     Right hand side is evaluated and the vaules are assigned to the left hand side.
 
-.play -numbers ../programs/assignments.go
+.play -numbers getting-started/assignments.go
 
 * Common data types
 
@@ -354,7 +354,7 @@ Only the matched case is run, not all the ones that follow.
 
 * switch - example
 
-.play -numbers ../programs/switch.go
+.play -numbers getting-started/switch.go
 
 
 * Using standard library
@@ -385,7 +385,7 @@ Hint: Use `strings.Split`
     $ go run echo.go this is a line
     this is a line
 
-: .code ../programs/sum.go
+: .code getting-started/sum.go
 
 * Session 2: Basic & Composite Types
 
@@ -459,11 +459,11 @@ The type [n]T is an array of n values of type T.
 - Each element of the array is initialized to zero value of type T, by default.
 
 * What would be output of
-.play -numbers ../programs/arrays.go
+.play -numbers getting-started/arrays.go
 
 * Slices
 
-.play -numbers ../programs/slices_intro.go
+.play -numbers getting-started/slices_intro.go
 
 * Iterating over slice/array
 
@@ -482,7 +482,7 @@ The type [n]T is an array of n values of type T.
 * Slices contd..
 
     `s[i:j]` gives us subslice of `s` with elements from index `i`, upto `j` (not including `j`th).
-.play -numbers ../programs/slices_indices.go
+.play -numbers getting-started/slices_indices.go
 
 * Slices contd..
 
@@ -505,8 +505,8 @@ The type [n]T is an array of n values of type T.
 
 * Slices contd..
 
-.play -numbers ../programs/slices_nil_empty.go
+.play -numbers getting-started/slices_nil_empty.go
 
 * Slices contd..
 
-.play -numbers ../programs/slices_pass_to_func.go
+.play -numbers getting-started/slices_pass_to_func.go
