@@ -416,17 +416,17 @@ Go's basic types are
 
 * Integers, Floats and booleans
 
-- Integers
+Integers
     +, -, *, /,
      %,
     <<, >>, &, |, ^,
     ==, !=, > , <, >=, <=
 
-- Floats
+Floats
     +, -, *, /,
     ==, !=, > , <, >=, <=
 
-- Booleans
+Booleans
     &&, ||, !
 
 
@@ -442,6 +442,9 @@ Multi line strings are enclosed in backquotes.
     r := `a multi
         line
         strings`
+
+
+* More strings
 
     fmt.Println(len(s))
     fmt.Println(s[0], s[7]) // "104 119"  ('h' and 'w')
