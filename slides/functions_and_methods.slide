@@ -1,4 +1,9 @@
-* Session 3: Functions and methods
+Functions and methods
+Mastering Go Workshop
+
+A S L Devi & Anand Chitipothu
+Pipal Academy
+https:/pipal.in/
 
 * Functions are first class in Go
 
@@ -9,8 +14,16 @@ Functions can be assigned to variables, passed as arguments to other functions a
     }
     f = square
 
-    fmt.Println(f(4) == square(4)) //true
+    fmt.Println(f(4) == square(4)) // true
 
+
+* Anonymous functions
+
+    sq := func(n int) int{
+        return n*n
+    }
+
+    fmt.Println(sq(2) == square(2)) // true
 
 - Write a function `adder` so that
     add2 := adder(2)
