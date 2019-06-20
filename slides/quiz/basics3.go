@@ -2,12 +2,11 @@ package main
 
 import "fmt"
 
-func foo(p *int) {
-	*p = 100
-}
-
 func main() {
-	n := 2
-	foo(&n)
+	n := 0
+	if true {
+		n := 1
+		n = n + 1
+	}
 	fmt.Println(n)
 }

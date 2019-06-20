@@ -1,0 +1,49 @@
+Structs, methods and embedding
+Mastering Go Workshop
+
+A S L Devi & Anand Chitipothu
+Pipal Academy
+https:/pipal.in/
+
+
+* Structs - recap
+
+.play -numbers structs/struct_init.go
+
+* Methods
+
+A method is simply a function with a special `receiver` argument.
+.play -numbers functions-methods/methods_basic.go
+
+* Methods Contd...
+
+One cannot create methods on non-local types
+
+.play -numbers functions-methods/methods_non_local.go
+
+* Methods with pointers...
+
+    $ go doc os.File
+    type File struct {
+        // Has unexported fields.
+    }
+    File represents an open file descriptor.
+
+    ...
+    func (f *File) Chmod(mode FileMode) error
+    func (f *File) Chown(uid, gid int) error
+    func (f *File) Close() error
+    func (f *File) Read(b []byte) (n int, err error)
+    func (f *File) ReadAt(b []byte, off int64) (n int, err error)
+
+* Example
+
+.play -numbers structs/struct_with_pointers.go
+
+* Methods Contd...
+
+.play -numbers structs/struct_embed.go
+
+
+
+

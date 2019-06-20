@@ -29,16 +29,3 @@ func main() {
     f()
     fmt.Println("Returned normally from f.")
 }
-
-/*
-Calling g.
-printing in g, 0
-printing in g, 1
-printing in g, 2
-Panicking!
-defer in g, 2
-defer in g, 1
-defer in g, 0
-Recovered in f, 3
-Returned normally from f.
-*/

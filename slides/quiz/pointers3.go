@@ -10,7 +10,6 @@ func foo(p *int) {
 func main() {
 	n := 2
 	p := &n
-	*p = 5
 	foo(p)
 	fmt.Println(n)
 }
