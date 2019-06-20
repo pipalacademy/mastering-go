@@ -70,7 +70,7 @@ Make IP address print as "a.b.c.d".
         ...
         Implementations must not retain p.
 
-* Exercise: UppercaseReader
+* Exercise: UppercaseWriter
 
 Implement a module `uppercase` that implements a function `NewWriter` takes a reader as argument and gives its contents in upper case.
 
