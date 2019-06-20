@@ -1,0 +1,79 @@
+Mastering Go Workshop
+
+A S L Devi & Anand Chitipothu
+Pipal Academy
+https:/pipal.in/
+
+* What is GO?
+
+- a statically typed, compiled programming language
+- Designed by Robert Griesemer, Rob Pike, and Ken Thompson at Google
+- First released in 2009 (10 years ago!)
+
+* The Roots
+
+- At Google, everything was developed in C++
+- It was effective, but very slow and tedious
+- Go was created to solve those problems
+
+* Primary Considerations
+
+Scale:
+- large programs
+- large teams
+- large number of dependencies
+
+* Modern Language
+
+- suitable for multiple core machines
+- suitable for networked machines
+- suitable for web
+
+* Software Engineering!
+
+Go is designed to solve the software engineering problem.
+
+* Go is Minimal
+
+Go has only 25 reserved keywords.
+
+    break        default      func         interface    select
+    case         defer        go           map          struct
+    chan         else         goto         package      switch
+    const        fallthrough  if           range        type
+    continue     for          import       return       var
+
+* Go is Modern
+
+- Built-in concurrency
+- awesome tool chain
+
+* Go is Pragmatic
+
+- Pointers, but no pointer arithmetic
+- Object-oriented, but no classes or subtype inheritance
+- Statically compiled, but garbage-collected
+- Performance is closer to C and developer experience is closer to Python
+
+* What is Go good for?
+
+Go is very well suited for system programming.
+
+- long lived server-side applications
+- backend APIs, databases, infrastructure management
+
+* Popular Software Written in Go
+
+- Docker
+- Kubernetes
+- Terraform
+
+* A Taste of Go
+
+* Hello, World!
+
+.play hello-world/hello.go
+
+* Hello, Web!
+
+.play hello-world/web.go

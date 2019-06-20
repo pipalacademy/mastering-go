@@ -1,0 +1,97 @@
+Maps
+Mastering Go Workshop
+
+A S L Devi & Anand Chitipothu
+Pipal Academy
+https:/pipal.in/
+
+* Maps
+
+   map[K]V // Map K -> V
+
+- Hash table implementation in Go
+- Maps values of type K to values of type V
+- Elements in a map are unordered
+
+* Maps - Usage
+
+    m := make(map[K]V)  // create a new map
+
+    len(m)              // length of the map
+
+    m[k]                // accessing an element from the map
+
+    delete(m, k)        // delete an element from the map
+
+    // iterating over the entries
+    for k, v := range(m) {
+        ...
+    }
+
+* Maps - Example
+
+.play  -numbers examples/map_ex1.go
+
+* Maps - Zero Value
+
+- The zero value of a map is nil
+- A nil map has no keys, nor any keys can be added
+
+* Creating and Initializing Maps
+
+Maps are can be created by calling `make`.
+
+    states := make(map[string]string)
+    states["AP"] = "Andhra Pradesh"
+    states["KA"] = "Karnataka"
+    states["MH"] = "Maharashtra"
+
+Or by using map literals:
+
+    states := map[string]string){
+        "AP": "Andhra Pradesh",
+        "KA": "Karnataka",
+        "MH": "Maharashtra",
+    }
+
+Gotcha: The trailing comma on the last entry is a must if the `}` is on the next line
+
+* Example: unique
+
+.code examples/map_uniq.go
+
+* Practice Problem: dups
+
+Write a program `dups.go` to find and print all the duplicate words in a sentence.
+
+    $ go run dups.go one two three two one
+    two
+    one
+
+    $ go run dups.go one two one two one
+    one
+    two
+
+* Practice Problem: wordfreq
+
+Write a program `wordfreq.go` to compute the frequency of all words in a file.
+
+    $ cat five.txt
+    five
+    five four
+    five four three
+    five four three two
+    five four three two one
+
+    $ go run wordfreq.go five.txt
+    2 two
+    1 one
+    5 five
+    4 four
+    3 three
+
+Please note that the order of lines in the output is not important.
+
+Hints:
+    - ioutil.ReadFile
+    - strings.Fields

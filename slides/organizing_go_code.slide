@@ -1,0 +1,216 @@
+Organizing Go Code
+Mastering Go Workshop
+
+A S L Devi & Anand Chitipothu
+Pipal Academy
+https:/pipal.in/
+
+* Overview
+
+- Go code organized in a workspace
+- A workspace contains many version control repositories
+- Each repository contains one or more packages
+- Each package consists of one or more Go source files in a single directory
+
+
+	workspace
+	  - repository-A
+	    - package-1
+	      - file1.go
+	      - file2.go
+	    - package-2
+	    ...
+	  - repository-B
+	  ...
+
+* Workspace
+
+- src/ to keep all source files
+- bin/ to keep all binary files
+
+Sample Workspace:
+
+	bin/
+		goimports
+		hello
+	src/
+		golang.org/x/tools/cmd/goimports/
+			doc.go
+			goimports.go
+			...
+		github.com/pipalacademy/hello
+			hello.go
+
+* GOPATH
+
+The GOPATH  environment variables specifies the location of workspace.
+
+The default workspace is `$HOME/go` on Linux/Mac.
+
+You can find what is your GOPATH using:
+
+	$ go env GOPATH
+	/Users/anand/go
+
+* Install a third-party package
+
+Install goimports:
+
+	$ go get golang.org/x/tools/cmd/goimports
+
+	# Adds missing imports
+	$ goimports hello.go
+
+You may have to set you PATH if `$GOPATH/bin` not already in your PATH.
+
+	$ export PATH=$PATH:$GOPATH/bin
+
+* Writing a Program
+
+* Writing a Program (1/n)
+
+Let's try to write a helloworld program.
+
+Choose a package path (github.com/pipalacademy/hello) and create that directory in `src/`.
+
+	$ mkdir -p $GOPATH/src/github.com/pipalacademy/hello
+
+(Windows users may have to create these directories by hand)
+
+* Writing a Program (2/n)
+
+Create a file named `hello.go` in that directory.
+
+	package main
+
+	import "fmt"
+
+	func main() {
+		fmt.Println("Hello, world.")
+	}
+
+* Writing a Program (3/n)
+
+Install the program using `go install` in the program directory:
+
+	$ go install
+
+That will not print any output if it is successful. You can check if the application is installed:
+
+	$ which hello
+	/Users/anand/go/bin/hello
+	$ hello
+	Hello, world!
+
+* Writing a Package
+
+* Writing a Package (1/n)
+
+Lets create a package to compute Fibonacci numbers.
+
+Just like writing a program, start with choosing a package path (github.com/yourname/fib).
+
+	$ mkdir -p $GOPATH/src/github.com/pipalacademy/fib/
+
+* Writing a Package (2/n)
+
+create a file `fib.go`
+
+	// Package fib provides the functions compute fibonacci numbers.
+	package fib // import "github.com/pipalacademy/fib"
+
+	// Fib(n) computes n'th fibonacci number
+	func Fib(n int) int {
+	     if n == 0 || n == 1 {
+	          return 1
+	     } else {
+	          return Fib(n-1) + Fib(n-2)
+	     }
+	}
+
+* Writing a Package (3/n)
+
+Install the package using `go install` in the package directory:
+
+	$ go install
+
+Check if the package is installed by checking the `go doc`.
+
+	$ go doc fib
+	package fib // import "github.com/pipalacademy/fib"
+
+	Package fib provides the functions compute fibonacci numbers.
+
+	func Fib(n int) int
+
+* Testing a package
+
+Write a file `fib_test.go` with the following contents:
+
+	package main
+	import "testing"
+
+	func TestFib(t *testing.T) {
+	    f0 := Fib(0)
+	    if f0 != 1 {
+	       t.Errorf("Incorrect. expected: %d, got: %d.", 1, f0)
+	    }
+	}
+
+* Testing a package (contd...)
+
+	$ go test
+	PASS
+	ok  	_/Users/anand/github/pipalacademy/mastering-go/fib	0.007s
+
+	$ go test -v
+	=== RUN   TestFib
+	--- PASS: TestFib (0.00s)
+	PASS
+	ok  	_/Users/anand/github/pipalacademy/mastering-go/fib	0.009s
+
+* Benchmarking a package
+
+Go has built-in support for benchmarking. Just like writing tests, we can write benchmark tests as well.
+
+	func BenchmarkFib10(b *testing.B) {
+	    for i := 0; i < b.N; i++ {
+	        Fib(10)
+	    }
+	}
+
+	func BenchmarkFib20(b *testing.B) {
+	    for i := 0; i < b.N; i++ {
+	        Fib(20)
+	    }
+	}
+
+* Benchmarking a package (Contd..)
+
+	$ go test -bench .
+	goos: darwin
+	goarch: amd64
+	pkg: github.com/pipalacademy/fib
+	BenchmarkFib10-4   	 2000000	       690 ns/op
+	BenchmarkFib20-4   	   20000	     87535 ns/op
+	PASS
+	ok  	github.com/pipalacademy/fib	4.727s
+
+* Structure for repository with multiple packages
+
+	myproject/
+	└── myproject
+	    ├── cmd
+	    │   └── fib
+	    │       └── fib.go
+	    └── pkg
+	        ├── fib
+	        │   ├── doc.go
+	        │   ├── fib.go
+	        │   └── fib_test.go
+	        └── sq
+	            ├── doc.go
+	            ├── sq.go
+	            └── sq_test.go
+
+See [[https://github.com/kubernetes/kubernetes]] for a real example.
