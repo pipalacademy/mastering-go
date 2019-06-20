@@ -2,21 +2,20 @@ package main
 
 import "fmt"
 
-type user struct {
-	firstname, lastname string
+type User struct{ Firstname, Lastname string }
+
+func Fullname(u User) string {
+	return u.Firstname + " " + u.Lastname
 }
 
-func fullname(u user) string {
-	return u.firstname + " " + u.lastname
-}
-
-func (u user) fullname() string {
-	return u.firstname + " " + u.lastname
+func (u User) Fullname() string {
+	return u.Firstname + " " + u.Lastname
 }
 
 func main() {
-	rob := user{"Rob", "Pike"}
-	fmt.Println(fullname(rob) == rob.fullname())
-	fmt.Println(fullname(rob), rob.fullname())
+	u1 := User{"Rob", "Pike"}
+	fmt.Println(Fullname(u1), u1.Fullname())
 
+	var u2 User
+	fmt.Println(u2.Fullname())
 }
