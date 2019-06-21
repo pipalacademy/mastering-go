@@ -1,4 +1,4 @@
-Structs, methods and embedding
+Structs and Methods
 Mastering Go Workshop
 
 A S L Devi & Anand Chitipothu
@@ -22,6 +22,8 @@ One cannot create methods on non-local types
 .play -numbers functions-methods/methods_non_local.go
 
 * Methods with pointers...
+
+    It's very common to see methods to have recievers as pointers than the objects themselves. The reason is to make changes to the reciever inside the method reflect in the caller.
 
     $ go doc os.File
     type File struct {

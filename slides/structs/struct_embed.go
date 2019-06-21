@@ -12,8 +12,6 @@ type Circle struct {
 	radius int
 }
 
-// type Circle struct {Point, radius int} // ???
-
 func (p Point) Distance(q Point) float64 {
 	return math.Hypot(q.x-p.x, q.y-p.y)
 }

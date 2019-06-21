@@ -1,4 +1,4 @@
-Functions and methods
+Functions and Error handling
 Mastering Go Workshop
 
 A S L Devi & Anand Chitipothu
@@ -131,12 +131,38 @@ A defer statement defers the execution of a function until the surrounding funct
 - `panic` is used to terminate the program when the program cannot continue it's execution.
 - When a function `f` encounters `panic`, its execution is stopped, any deferred functions are executed and then the control returns to its caller. To the caller, F then behaves like a call to panic and process continues.
 - `recover` is a built-in function that regains control of a panicking goroutine. Recover is only useful inside deferred functions.
+- After recovering, the control flow goes to the caller function.
 
 * Example
 .play -numbers functions-methods/panic_recover.go
 
 * What would be output of
-.play -numbers functions-methods/panic_recover_more.go
+    package main
+    import "fmt"
+    func recovery() {
+        if r := recover(); r != nil {
+            fmt.Println("Recovered in f", r)
+        }
+    }
+    func f() {
+        defer recovery()
+        fmt.Println("Calling g.")
+        g(0)                                     // executes code to panic
+        fmt.Println("Returned normally from g.") // Never printed
+    }
+    func g(i int) {
+        if i > 2 {
+            fmt.Println("Panicking!")
+            panic(fmt.Sprintf("%v", i))
+        }
+        defer fmt.Println("Defer in g", i)
+        fmt.Println("Printing in g", i)
+        g(i + 1)
+    }
+    func main() {
+        f()
+        fmt.Println("Returned normally from f.") }
+
 
 * Variadic functions
 
@@ -146,6 +172,10 @@ A variadic function is one that can be called with varying numbers of arguments.
 
 .play -numbers functions-methods/variadic_sum.go
 
-- Write a function `avg` which takes variable number of float32s and returns their average.
+* Problems
+
+- Write a function `sum` which takes variable number of integers and returns their sum.
 - Write a function `strjoin` that takes a separator as first argument followed by variable number of strings to join with that separator.
 
+* Solution
+.play -numbers functions-methods/variadic_sum.go
