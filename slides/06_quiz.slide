@@ -7,71 +7,71 @@ https:/pipal.in/
 
 
 * What would be output of
-.play -numbers quiz/basics3.go
+.play -numbers examples/quiz/basics3.go
 
 * What would be output of
-.play -numbers quiz/basics1.go
+.play -numbers examples/quiz/basics1.go
 
 * What would be output of
-.play -numbers quiz/basics2.go
+.play -numbers examples/quiz/basics2.go
 
 * What would be output of
-.play -numbers quiz/pointers1.go
+.play -numbers examples/quiz/pointers1.go
 
 * What would be output of
-.play -numbers quiz/pointers2.go
+.play -numbers examples/quiz/pointers2.go
 
 * What would be output of
-.play -numbers quiz/strings.go
+.play -numbers examples/quiz/strings.go
 
 * What would be output of
-.play -numbers quiz/bytes.go
+.play -numbers examples/quiz/bytes.go
 
 * What would be output of
-.play -numbers quiz/slices2.go
+.play -numbers examples/quiz/slices2.go
 
 * What would be output of
-.play -numbers quiz/slices3.go
+.play -numbers examples/quiz/slices3.go
 
 * What would be output of
-.play -numbers quiz/slices1.go
+.play -numbers examples/quiz/slices1.go
 
 * What would be output of
-.play -numbers quiz/append.go
+.play -numbers examples/quiz/append.go
 
 * What would be output of
-.play -numbers quiz/append1.go
+.play -numbers examples/quiz/append1.go
 
 * What would be output of
-.play -numbers quiz/struct2.go
+.play -numbers examples/quiz/struct2.go
 
 * What would be output of
-.play -numbers quiz/struct1.go
+.play -numbers examples/quiz/struct1.go
 
 * What would be output of
-.play -numbers quiz/struct3.go
+.play -numbers examples/quiz/struct3.go
 
 * What would be output of
-.play -numbers quiz/struct4.go
+.play -numbers examples/quiz/struct4.go
 
 * What would be output of
-.play -numbers quiz/embed.go
+.play -numbers examples/quiz/embed.go
 
 * What would be output of
-.play -numbers quiz/map3.go
+.play -numbers examples/quiz/map3.go
 
 * What would be output of
-.play -numbers quiz/map.go
+.play -numbers examples/quiz/map.go
 
 * What would be output of
-.play -numbers quiz/map1.go
+.play -numbers examples/quiz/map1.go
 
 * What would be output of
-.play -numbers quiz/map2.go
+.play -numbers examples/quiz/map2.go
 
 * What would be output of
-.play -numbers quiz/map4.go
+.play -numbers examples/quiz/map4.go
 
 * What would be output of
-.play -numbers quiz/err.go
+.play -numbers examples/quiz/err.go
 

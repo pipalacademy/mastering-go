@@ -72,8 +72,8 @@ Go is very well suited for system programming.
 
 * Hello, World!
 
-.play hello-world/hello.go
+.play examples/hello-world/hello.go
 
 * Hello, Web!
 
-.play hello-world/web.go
+.play examples/hello-world/web.go

@@ -12,7 +12,7 @@ https:/pipal.in/
 
 * Hello world!
 
-.play -numbers getting-started/helloworld.go
+.play -numbers examples/getting-started/helloworld.go
 
 * Running Go programs
 
@@ -53,13 +53,13 @@ A var declaration can include initializers, one per variable.
 
 * Variables contd...
 
-.play getting-started/zero_values.go
+.play examples/getting-started/zero_values.go
 
 - Find zero values of other types such as `string`, `bool` and `float32`.
 
 * Constants
 
-.play -numbers getting-started/constants.go
+.play -numbers examples/getting-started/constants.go
 
 - Constants can only be numbers, characters, strings or booleans.
 - They are created at compile time, even when defined as locals in functions.
@@ -74,7 +74,7 @@ A var declaration can include initializers, one per variable.
 * Assignments
     Right hand side is evaluated and the vaules are assigned to the left hand side.
 
-.play -numbers getting-started/assignments.go
+.play -numbers examples/getting-started/assignments.go
 
 * Common data types
 
@@ -359,7 +359,7 @@ Only the matched case is run, not all the ones that follow.
 
 * switch - example
 
-.play -numbers getting-started/switch.go
+.play -numbers examples/getting-started/switch.go
 
 
 * Using standard library
@@ -369,8 +369,6 @@ Details of a variable/function can be seen by `$go doc <pkg>.<funcName>`
 
 - Write a program to print out its first command line argument.
 Hint: Use `os.Args`
-
-: .play ..programs/echo1.go
 
 - Write a program `square.go` which takes an integer as command line argument and prints its square.
 Hint: Use `strconv.Atoi`.
@@ -482,11 +480,12 @@ The type [n]T is an array of n values of type T.
 - Each element of the array is initialized to zero value of type T, by default.
 
 * What would be output of
-.play -numbers getting-started/arrays.go
+
+.play -numbers examples/getting-started/arrays.go
 
 * Slices
 
-.play -numbers getting-started/slices_intro.go
+.play -numbers examples/getting-started/slices_intro.go
 
 * Iterating over slice/array
 
@@ -505,7 +504,7 @@ The type [n]T is an array of n values of type T.
 * Slices contd..
 
     `s[i:j]` gives us subslice of `s` with elements from index `i`, upto `j` (not including `j`th).
-.play -numbers getting-started/slices_indices.go
+.play -numbers examples/getting-started/slices_indices.go
 
 * Slices contd..
 
@@ -528,8 +527,8 @@ The type [n]T is an array of n values of type T.
 
 * Slices contd..
 
-.play -numbers getting-started/slices_nil_empty.go
+.play -numbers examples/getting-started/slices_nil_empty.go
 
 * Slices contd..
 
-.play -numbers getting-started/slices_pass_to_func.go
+.play -numbers examples/getting-started/slices_pass_to_func.go

@@ -29,7 +29,7 @@ https:/pipal.in/
 
 * Functions can be passed as arguments to other functions
 
-.play -numbers functions-methods/funcs_as_args.go
+.play -numbers examples/functions-methods/funcs_as_args.go
 
 * Functions can be returned from other functions
 
@@ -40,7 +40,7 @@ https:/pipal.in/
 would print 3, 101 respectively.
 
 * Solution
-.code functions-methods/adder.go
+.code examples/functions-methods/adder.go
 
 * Problem
 - Write a function `mapper` returns a new slice containing the results of applying the function `f` to each string in the original slice.
@@ -48,7 +48,7 @@ would print 3, 101 respectively.
     ["ONE", "TWO", "THREE"]
 
 * Solution
-.code functions-methods/mapper.go
+.code examples/functions-methods/mapper.go
 
 - Write a function `filter` that returns a new slice containing all strings in the slice that satisfy the predicate `f`.
     fmt.Println(mapper(strings.HasPrefix("o"), []string{"one", "two", "three"})
@@ -134,7 +134,7 @@ A defer statement defers the execution of a function until the surrounding funct
 - After recovering, the control flow goes to the caller function.
 
 * Example
-.play -numbers functions-methods/panic_recover.go
+.play -numbers examples/functions-methods/panic_recover.go
 
 * What would be output of
     package main
@@ -170,7 +170,7 @@ A variadic function is one that can be called with varying numbers of arguments.
 
 `fmt.Println` is a good example of a one.
 
-.play -numbers functions-methods/variadic_sum.go
+.play -numbers examples/functions-methods/variadic_sum.go
 
 * Problems
 
@@ -178,4 +178,4 @@ A variadic function is one that can be called with varying numbers of arguments.
 - Write a function `strjoin` that takes a separator as first argument followed by variable number of strings to join with that separator.
 
 * Solution
-.play -numbers functions-methods/variadic_sum.go
+.play -numbers examples/functions-methods/variadic_sum.go
