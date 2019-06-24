@@ -74,8 +74,8 @@ Make IP address print as "a.b.c.d".
 
 Implement a module `uppercase` that implements a function `NewWriter` takes a reader as argument and gives its contents in upper case.
 
-    r := uppercase.NewWriter(os.Stdout)
-    fmt.Println("Concurrency is not parallelism.")
+    var w *io.Writer = uppercase.NewWriter(os.Stdout)
+    fmt.Fprintf(w, "Concurrency is not parallelism.")
 
 What would be the path to import `uppercase`?
 
