@@ -1,14 +1,25 @@
 References
 
-
-- The Go Programming language
+* The Go Programming language
     by Alan Donovan, Brian Kernighan
 
-- https://golang.org/doc/effective_go.html
+* An Introduction to Programming in Go
 
-- Writing, building, installing, and testing Go code
-https://www.youtube.com/watch?v=XCsL89YtqCs
+.image images/book-intro-go.png _ 300
+.link https://www.golang-book.com/books/intro
+
+* Effective Go
+
+Tips for writing clear, idiomatic Go code.
+
+.link https://golang.org/doc/effective_go.html
+
+* Others
 
 -  Go Proverbs
 https://go-proverbs.github.io/
 https://www.youtube.com/watch?v=PAAkCSZUG1c
+
+- Writing, building, installing, and testing Go code
+https://www.youtube.com/watch?v=XCsL89YtqCs
+
