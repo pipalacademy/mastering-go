@@ -1,0 +1,520 @@
+* Getting started
+
+* Verify Go installation
+
+    $ go version
+    go version go1.12.6 darwin/amd64
+
+* Hello world!
+
+.play -numbers ../programs/helloworld.go
+
+* Running Go programs
+
+    $ go build helloworld.go
+    $ ./helloworld
+
+or
+
+    $ go run helloworld.go
+
+* Variables
+
+The `var` statement declares a list of variables and the type is at the end.
+
+    var m int
+    var a, b bool
+
+    m = 1
+    a, b = true, false
+
+* Variables with initializers
+
+A var declaration can include initializers, one per variable.
+
+    var m int = 1
+    var a, b bool = true, false
+
+* Short variable declarations
+
+    m := 1                  // same as: var m int = 1
+    a, b := true, false     // same as: var a, b bool = true, false
+
+* Variables contd...
+
+- There should not be unused variables or imported packages for the program to compile.
+- Go prefers mixed caps for multi word names like `someVar` than with underscores like `some_var`
+- Every declared variable is initialized to its zero value.
+
+* Variables contd...
+
+.play ../programs/zero_values.go
+
+- Find zero values of other types such as `string`, `bool` and `float32`.
+
+* Constants
+
+.play -numbers ../programs/constants.go
+
+- Constants can only be numbers, characters, strings or booleans.
+- They are created at compile time, even when defined as locals in functions.
+
+* Problems
+- Check which of the following expressions can be declared as constants.
+
+    (a) 1<<10
+    (b) math.Sin(math.Pi/4)
+    (c) 365*24*60*60
+
+* Assignments
+    Right hand side is evaluated and the vaules are assigned to the left hand side.
+
+.play -numbers ../programs/assignments.go
+
+* Common data types
+
+    - Integers
+    - Floating point numbers
+    - Boolean values
+    - Arrays
+    - Slices
+    - Strings, Bytes and Runes
+    - Maps
+    - Structs
+    - Pointers
+
+* Integers
+
+    var n int       // initializes to 0
+
+    var n int = 2
+
+    n := 2
+
+There are variants for different sizes and their unsigned forms.
+
+* Floating point numbers
+
+    var f float32   // initializes to 0.0
+
+    var f float32 = 1.2
+
+    f := 3.14
+
+There is `float64` for dealing with higher precision floating point numbers.
+
+* Boolean values
+
+    var b bool      // initializes to false
+
+    var b bool = true
+
+    b := true
+
+* Arrays
+
+    var a [5]int     // initializes to {0, 0, 0, 0, 0}
+
+    a := [5]int{1, 2, 3, 4, 5}
+
+Arrays have fixed sizes and can be of any type.
+
+    b := [3]string{"one", "two", "three"}
+
+    c := [4]bool{true, false, false, true}
+
+* Slices
+
+    var a []int     // initializes to nil
+
+    b := []int{1, 2, 3, 4, 5}
+
+    c := []string{"one", "two", "three"}
+
+* Strings
+
+    var a string    // initializes to ""
+
+    b := "hello, go!"
+
+    c := "œ∑†¥ß"    // non-ascii
+
+* Bytes
+
+    var b byte      // initializes to 0
+
+    b := 'p'
+
+    c := 112
+
+* Runes
+
+    var b rune      // initializes to 0
+
+    b := 'p'
+
+    c := 'œ'
+
+
+* Maps
+
+    var m map[string]int    // initializes to nil
+
+    m1 := make(map[string]int)
+    m1["one"] = 1
+    m1["two"] = 2
+
+    m2 := map[string]int{"one": 1, "two": 2}
+
+* Structs
+
+    type Point struct {
+        x int
+        y int
+    }
+
+    p := Point{1, 2}
+
+* Pointers
+    var p *int      // initializes to nil
+
+    a := 10
+    p := &a
+
+    b := *p         // b = 10
+
+
+* Functions
+
+Functions break a big job into smaller pieces that might be written by different people separated by both time and space. They make code more readable and reusable.
+
+    func name(parameters) returnType {
+        body
+    }
+
+
+* Functions - example
+
+    func incr(m int) int {
+        return m+1
+    }
+    incr(2) // 3
+
+- Every function call must provide an argument for each parameter, in the same order of declaration.
+- Go has no concept of default parameter values, nor any way to specify arguments by name.
+
+* Problems
+
+- Write a function `add` that takes 2 integers as arguments and returns their sum.
+- Write a function `square` that takes an integer as argument and return its square.
+- Write a function `sumOfSquares` to compute sum of squares of two integers.
+
+* Functions with multiple return values
+
+    func f() (int, string){
+        return 1, "one"
+    }
+
+Converting string to integer can be done by
+
+    n, err := strconv.Atoi("123")
+
+
+In Go, it's very common for functions/methods to return a value followed by an error.
+
+    func Open(name string) (*File, error)               // os.Open
+
+    func Get(url string) (resp *Response, err error)    // http.Get
+
+    func Marshal(v interface{}) ([]byte, error)         // json.Marshal
+
+* Problems
+
+- Write a function `divide` that takes 2 integers as arguments and return quotient and remainder.
+
+* Named return values
+
+    func incr(m int) (n int) {
+        n = m + 1
+        return
+    }
+
+: There's a lot more to do with functions in Go, we'll come back to them soon.
+
+* Control Structures
+
+* if
+
+    if cond {
+        ...
+    }
+
+* if ... else
+
+    if cond1 {
+        ...
+    } else if cond2 {
+        ...
+    } else {
+        ...
+    }
+
+* if - example
+
+    func abs(n int) int {
+        if n >= 0 {
+            return n
+        }
+        return -n
+    }
+
+* Problems
+
+- Write a function `isOdd` to return a bool indicating if the integer argument is odd.
+- Write a function `min` to return minimum of 2 integers.
+- Write a function `min3` to return minimum of 3 integers.
+
+
+* if with a short statement
+- Lets us do variable initialization followed by condition on it.
+- The variable would be accessible only in the `if...else` block.
+
+    if v := someFunctionCall(); conditionOn(v) {
+        ...
+    }
+
+
+* if with statement - example
+
+    func cappedPow(x, n, limit float64) float64 {
+        if v := math.Pow(x, n); v < limit {
+            return v
+        }
+        return limit
+    }
+
+
+* for
+
+    for init; condition; post {
+        ...
+    }
+
+* for without init and post
+
+    for condition { // while
+        ...
+    }
+
+* for without condition
+
+    for {   // forever
+        ...
+    }
+
+* for - example
+
+    sum := 0
+    for i := 0; i < 10; i++ {
+        sum += i
+    }
+
+`break`, `continue` work same as in other programming languages.
+
+We'll see iterating over arrays, slices and maps with `for` when we introduce those types.
+
+
+* Problems
+
+- Write a function `longest` to find the longest word in a slice of strings.
+    func longest(words []string) string{
+        ...
+    }
+- Write a function `count` to find the number of occurences of a character in a string.
+    func count(s string, c byte){
+    ...
+    }
+- Write a function `isPrime` to check if a given integer is a prime.
+
+* switch
+
+    Used for multi-way branch. Though one can achieve the same with `if...else if`, it's more idiomatic in Go.
+
+    switch (optional-init; ) v {
+    case cond1:
+        ...
+    case cond2:
+        ...
+    default:
+        ...
+    }
+
+Only the matched case is run, not all the ones that follow.
+
+
+* switch - example
+
+.play -numbers ../programs/switch.go
+
+
+* Using standard library
+
+Documentation of each go package <pkg>  `$ go doc <pkg>`.
+Details of a variable/function can be seen by `$go doc <pkg>.<funcName>`
+
+- Write a program to print out its first command line argument.
+Hint: Use `os.Args`
+
+:.play ..programs/echo1.go
+
+- Write a program `square.go` which takes an integer as command line argument and prints its square.
+Hint: Use `strconv.Atoi`.
+
+- Write a program `count_args.go` which prints out the count of its command line arguments.
+Hint: Use `os.Args`
+
+- Write a function `countWords` to count words in a given sentence.
+Hint: Use `strings.Split`
+
+    func countWords(sen string)int{
+
+    }
+
+- Write a program `echo` which prints out all the command line arguments.
+
+    $ go run echo.go this is a line
+    this is a line
+
+: .code ../programs/sum.go
+
+* Session 2: Basic & Composite Types
+
+* Basic Types
+
+Go's basic types are
+    bool
+
+    string
+
+    int  int8  int16  int32  int64
+    uint uint8 uint16 uint32 uint64 uintptr
+
+    byte // alias for uint8
+
+    rune // alias for int32
+         // represents a Unicode code point
+
+    float32 float64
+
+    complex64 complex128
+
+
+* Integers, Floats and booleans
+* Strings, bytes and runes
+
+A string is an immutable array of bytes.
+Strings are enclosed in double quotes.
+
+    s := "hello, world"
+
+Multi line strings are enclosed in backquotes.
+
+    r := `a multi
+        line
+        strings`
+
+    fmt.Println(len(s))
+    fmt.Println(s[0], s[7]) // "104 119"  ('h' and 'w')
+    fmt.Printf("%c %c", s[0], s[7]) // h w
+
+`s[i:j]` gives us substring of `s` with chars from index `i`, upto `j` (not including `j`th).
+
+    fmt.Println(s[0:5]) //  "hello"
+    fmt.Println(s[:5])  //  "hello"
+    fmt.Println(s[7:])  //  "world"
+    fmt.Println(s[:])   //  "hello, world"
+
+* Problems
+
+- Write a function `reverse` to return its argument string in reverse order.
+    func reverse(s string) string{
+    ...
+    }
+
+- Write a function that joins a slice of strings with a separator.
+    func strjoin(strs []string, sep string){
+    ...
+    }
+
+
+* Arrays
+
+The type [n]T is an array of n values of type T.
+
+    var a [10]int
+
+    abcd := [4]string{"ant", "bee", "cat", "dog"} // "{}", not []
+
+- Arrays cannot be resized.
+- Each element of the array is initialized to zero value of type T, by default.
+
+* What would be output of
+.play -numbers ../programs/arrays.go
+
+* Slices
+
+.play -numbers ../programs/slices_intro.go
+
+* Iterating over slice/array
+
+    for index, value := range a {
+        fmt.Println(index, value)
+    }
+
+    for index := range a {
+        fmt.Println(index)
+    }
+
+    for _, value := range a {
+        fmt.Println(value)
+    }
+
+* Slices contd..
+
+    `s[i:j]` gives us subslice of `s` with elements from index `i`, upto `j` (not including `j`th).
+.play -numbers ../programs/slices_indices.go
+
+* Slices contd..
+
+- A slice does not store any data, it just describes a section of an underlying array.
+- Changing the elements of a slice modifies the corresponding elements of its underlying array.
+- Other slices that share the same underlying array will see those changes.
+
+
+* Problems
+
+- Write a function `integers` that takes a slice of strings and converts them slice of numbers. Also, return an error if any of the given values is not a valid integer.
+
+    func integers(values []string) ([]int, error){
+
+    }
+
+- Write a function `sum` which takes a slice of ints and returns their sum.
+
+- Combine the above two functions to write a program that takes numbers as command line arguments and prints their sum. In case of error, it should print out the error.
+
+* Slices contd..
+
+.play -numbers ../programs/slices_nil_empty.go
+
+* Slices contd..
+
+.play -numbers ../programs/slices_pass_to_func.go
+
+
+* Maps
+* Struct
+* Type declarations
+* JSON and templates
+
+

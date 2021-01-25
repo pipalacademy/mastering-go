@@ -1,0 +1,38 @@
+Mastering Go
+June 19-21, 2019
+
+A S L Devi & Anand Chitipothu
+Pipal Academy
+https://pipal.in/
+@pipalacademy
+
+
+Session 5: Methods
+
+Go has types and values rather than classes and objects.
+
+* Method declarations
+* Struct embedding
+* Encapsulation
+
+Session 6: Interfaces
+
+* Introduction to interfaces
+* Comparision with classes
+* Example: parsing command-line flags
+* Example: sorting with sort.Interface
+
+
+Session 7: Working with Files
+
+* Reading and writing files
+* Working with bu ers
+* Handling errors
+
+Session 8: Go Developer Tools
+
+* The go test tool
+* Writing e ective tests
+* Coverage
+* Benchmarking
+* Profiling
